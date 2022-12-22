@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+# do not touch the alternative while being deconfigured
+# this is a M-A:same package which gets regularily deconfigured
+# during upgrades if multiple architectures are installed
+if [ "$1" = "remove" ]; then
+        update-alternatives --remove caf-openmpi /usr/lib/@DEB_HOST_MULTIARCH@/open-coarrays/openmpi/bin/caf
+        update-alternatives --remove caf /usr/bin/caf.openmpi
+fi
+
+
+
+#DEBHELPER#

@@ -1,0 +1,92 @@
+Source: open-coarrays
+Section: utils
+Priority: optional
+Maintainer: Alastair McKinstry <mckinstry@debian.org>
+Build-Depends: debhelper-compat (= 13), 
+ dh-buildinfo,
+ dh-sequence-fortran-mod,
+ gfortran | fortran-compiler,
+ libopenmpi-dev,
+ libmpich-dev,
+ cmake (>= 3.3.1), 
+ openssh-client,
+Standards-Version: 4.5.1
+Homepage: https://www.opencoarrays.org/
+Vcs-Browser: https://salsa.debian.org:/science-team/open-coarrays
+Vcs-Git: https://salsa.debian.org:/science-team/open-coarrays.git -b debian/latest
+
+
+Package: libcoarrays-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}, gfortran | fortran-compiler
+Description: Co-Array Fortran libraries 
+ OpenCoArrays is an open-source software project that supports the
+ coarray Fortran (CAF) parallel programming features of the Fortran 2008
+ standard and several features proposed for Fortran 2015 in the draft
+ Technical Specification [TS 18508] "Additional Parallel Features in Fortran".
+ .
+ This package contains shared development files (headers and fortran modules)
+
+Package: libcoarrays-openmpi-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}, gfortran  | fortran-compiler, openmpi-bin,
+ libcaf-openmpi-3 (= ${binary:Version}), libcoarrays-dev
+Description: Co-Array Fortran libraries  - development files (OpenMPI)
+ OpenCoArrays is an open-source software project that supports the 
+ coarray Fortran (CAF) parallel programming features of the Fortran 2008 
+ standard and several features proposed for Fortran 2015 in the draft 
+ Technical Specification [TS 18508] "Additional Parallel Features in Fortran".
+ .
+ This package provides the libraries necessary for Fortran to build parallel
+ CAF programs built on top of OpenMPI.
+
+Package: libcaf-openmpi-3
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Breaks: libcoarrays0d (<< 1.8.10)
+Replaces: libcoarrays0d (<< 1.8.10)
+Description: Co-Array Fortran libraries  (OpenMPI)
+ OpenCoArrays is an open-source software project that supports the
+ coarray Fortran (CAF) parallel programming features of the Fortran 2008
+ standard and several features proposed for Fortran 2015 in the draft
+ Technical Specification [TS 18508] "Additional Parallel Features in Fortran".
+ .
+ This package provides the libraries necessary for Fortran to build parallel
+ CAF programs built on top of OpenMPI.
+
+Package: libcoarrays-mpich-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}, gfortran | fortran-compiler, mpich,
+ libcaf-mpich-3 (= ${binary:Version}), libcoarrays-dev
+Description: Co-Array Fortran libraries for - development files (MPICH)
+ OpenCoArrays is an open-source software project that supports the 
+ coarray Fortran (CAF) parallel programming features of the Fortran 2008 
+ standard and several features proposed for Fortran 2015 in the draft 
+ Technical Specification [TS 18508] "Additional Parallel Features in Fortran".
+ .
+ This package provides the libraries necessary for Fortran to build parallel
+ CAF programs built on top of MPICH MPI.
+
+Package: libcaf-mpich-3
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Breaks: libcoarrays0d (<< 1.8.10)
+Replaces: libcoarrays0d (<< 1.8.10)
+Description: Co-Array Fortran libraries  (MPICH)
+ OpenCoArrays is an open-source software project that supports the
+ coarray Fortran (CAF) parallel programming features of the Fortran 2008
+ standard and several features proposed for Fortran 2015 in the draft
+ Technical Specification [TS 18508] "Additional Parallel Features in Fortran".
+ .
+ This package provides the libraries necessary for Fortran to build parallel
+ CAF programs built on top of MPICH MPI.

@@ -1,0 +1,185 @@
+Description: Use ${CAF_LIB_NAME} for library name, so we can produce
+ two versions (mpich, openmpi)
+Author: Alastair McKinstry <mckinstry@debian.org>
+Last-Updated: 2018-12-14
+Forwarded: no
+
+Index: open-coarrays-2.9.0/CMakeLists.txt
+===================================================================
+--- open-coarrays-2.9.0.orig/CMakeLists.txt
++++ open-coarrays-2.9.0/CMakeLists.txt
+@@ -32,6 +32,8 @@ option( CAF_ENABLE_ISO_Fortran_BINDING
+   "Build and install F2018 C interop iso_fortran_binding.h header; experimental!"
+   ${_TF} )
+ 
++SET(CAF_LIB_NAME "caf_mpi" CACHE STRING "Default name of the CAF library.")
++SET(CAF_LIB_NAME_STATIC "caf_mpi_static" CACHE STRING "Default name of the CAF library.")
+ 
+ # Name project and specify source languages
+ # Parse version from .VERSION file so that more info can be added and easier to get from scripts
+Index: open-coarrays-2.9.0/src/mpi/CMakeLists.txt
+===================================================================
+--- open-coarrays-2.9.0.orig/src/mpi/CMakeLists.txt
++++ open-coarrays-2.9.0/src/mpi/CMakeLists.txt
+@@ -29,38 +29,38 @@ target_link_libraries(opencoarrays_mod
+   PUBLIC ${MPI_Fortran_LINK_FLAGS}
+   PUBLIC ${MPI_Fortran_LIBRARIES})
+ target_link_libraries(opencoarrays_mod
+-  PUBLIC caf_mpi_static)
++  PUBLIC ${CAF_LIB_NAME_STATIC})
+ target_include_directories(opencoarrays_mod PUBLIC
+   $<$<COMPILE_LANGUAGE:Fortran>:${MPI_Fortran_INCLUDE_PATH}>
+   $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}/${mod_dir_tail}>
+   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${mod_dir_tail}>)
+ 
+-add_library(caf_mpi SHARED mpi_caf.c ../common/caf_auxiliary.c)
+-add_library(caf_mpi_static STATIC  mpi_caf.c ../common/caf_auxiliary.c)
+-target_link_libraries(caf_mpi
++add_library(${CAF_LIB_NAME} SHARED mpi_caf.c ../common/caf_auxiliary.c)
++add_library(${CAF_LIB_NAME_STATIC} STATIC  mpi_caf.c ../common/caf_auxiliary.c)
++target_link_libraries(${CAF_LIB_NAME}
+   PUBLIC ${MPI_C_LINK_FLAGS}
+   PUBLIC ${MPI_C_LIBRARIES})
+-target_link_libraries(caf_mpi_static
++target_link_libraries(${CAF_LIB_NAME_STATIC}
+   PUBLIC ${MPI_C_LINK_FLAGS}
+   PUBLIC ${MPI_C_LIBRARIES})
+-set_target_properties(caf_mpi_static
++set_target_properties(${CAF_LIB_NAME_STATIC}
+   PROPERTIES
+   POSITION_INDEPENDENT_CODE TRUE)
+-target_include_directories(caf_mpi PUBLIC
++target_include_directories(${CAF_LIB_NAME} PUBLIC
+   $<$<COMPILE_LANGUAGE:C>:${MPI_C_INCLUDE_PATH}>
+   $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
+   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+-target_include_directories(caf_mpi_static PUBLIC
++target_include_directories(${CAF_LIB_NAME_STATIC} PUBLIC
+   $<$<COMPILE_LANGUAGE:C>:${MPI_C_INCLUDE_PATH}>
+   $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
+   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+-target_compile_options(caf_mpi
++target_compile_options(${CAF_LIB_NAME}
+   PUBLIC $<$<COMPILE_LANGUAGE:C>:${MPI_C_COMPILE_OPTIONS}>)
+-target_compile_definitions(caf_mpi
++target_compile_definitions(${CAF_LIB_NAME}
+   PUBLIC $<$<COMPILE_LANGUAGE:C>:${MPI_C_COMPILE_DEFINITIONS}>)
+-target_compile_options(caf_mpi_static
++target_compile_options(${CAF_LIB_NAME_STATIC}
+   PUBLIC $<$<COMPILE_LANGUAGE:C>:${MPI_C_COMPILE_OPTIONS}>)
+-target_compile_definitions(caf_mpi_static
++target_compile_definitions(${CAF_LIB_NAME_STATIC}
+   PUBLIC $<$<COMPILE_LANGUAGE:C>:${MPI_C_COMPILE_DEFINITIONS}>)
+ 
+ set(CAF_SO_VERSION 0)
+@@ -74,7 +74,7 @@ if(gfortran_compiler)
+   endif()
+ endif()
+ 
+-set_target_properties ( caf_mpi
++set_target_properties ( ${CAF_LIB_NAME}
+   PROPERTIES
+   SOVERSION ${CAF_SO_VERSION}
+ #  VERSION ${PROJECT_VERSION}
+@@ -82,7 +82,7 @@ set_target_properties ( caf_mpi
+ 
+ # Create a symlink in the include dir
+ if(UNIX)
+-  add_custom_command(TARGET caf_mpi
++  add_custom_command(TARGET ${CAF_LIB_NAME}
+     POST_BUILD
+     COMMAND ${CMAKE_COMMAND} -E create_symlink "./${mod_dir_tail}/opencoarrays.mod" "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}/opencoarrays.mod"
+     COMMENT "Creating symlink ${CMAKE_INSTALL_INCLUDEDIR}/opencoarrays.mod --> ${CMAKE_INSTALL_INCLUDEDIR}/${mod_dir_tail}/opencoarrays.mod")
+@@ -91,18 +91,18 @@ endif()
+ install(DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}/" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+   FILES_MATCHING PATTERN "opencoarrays.mod")
+ 
+-set_target_properties( caf_mpi_static
++set_target_properties( ${CAF_LIB_NAME_STATIC}
+   PROPERTIES
+   SOVERSION ${CAF_SO_VERSION}
+ #  VERSION ${PROJECT_VERSION}
+ )
+ 
+ if (gfortran_compiler)
+-  target_compile_options(caf_mpi INTERFACE $<$<COMPILE_LANGUAGE:Fortran>:-fcoarray=lib>)
+-  target_compile_options(caf_mpi_static INTERFACE $<$<COMPILE_LANGUAGE:Fortran>:-fcoarray=lib>)
++  target_compile_options(${CAF_LIB_NAME} INTERFACE $<$<COMPILE_LANGUAGE:Fortran>:-fcoarray=lib>)
++  target_compile_options(${CAF_LIB_NAME_STATIC} INTERFACE $<$<COMPILE_LANGUAGE:Fortran>:-fcoarray=lib>)
+ endif()
+ 
+-install(TARGETS opencoarrays_mod caf_mpi caf_mpi_static EXPORT OpenCoarraysTargets
++install(TARGETS opencoarrays_mod ${CAF_LIB_NAME} ${CAF_LIB_NAME_STATIC} EXPORT OpenCoarraysTargets
+   DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+   ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+   LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+@@ -150,9 +150,9 @@ endif()
+ include(CheckIncludeFile)
+ CHECK_INCLUDE_FILE("alloca.h" HAVE_ALLOCA)
+ if(NOT HAVE_ALLOCA)
+-  target_compile_definitions(caf_mpi
++  target_compile_definitions(${CAF_LIB_NAME}
+     PRIVATE -DALLOCA_MISSING)
+-  target_compile_definitions(caf_mpi_static
++  target_compile_definitions(${CAF_LIB_NAME_STATIC}
+     PRIVATE -DALLOCA_MISSING)
+   message(WARNING "Could not find <alloca.h>. Assuming functionality is provided elsewhere.")
+ endif()
+@@ -176,7 +176,7 @@ if(NOT HAVE_SIGKILL) # try -D_POSIX, nee
+   CHECK_SYMBOL_EXISTS(SIGKILL "signal.h" HAVE_SIGKILL2)
+   if(HAVE_SIGKILL2)
+     set(HAVE_SIGKILL ${HAVE_SIGKILL2})
+-    foreach(lib caf_mpi caf_mpi_static)
++    foreach(lib ${CAF_LIB_NAME} ${CAF_LIB_NAME_STATIC})
+       target_compile_definitions(${lib}
+     	PUBLIC -D_POSIX)
+     endforeach()
+@@ -213,7 +213,7 @@ set(MPI_HEADERS mpi.h)
+ include(CheckIncludeFiles)
+ CHECK_INCLUDE_FILES("mpi.h;mpi-ext.h" HAVE_MPI_EXT)
+ if(HAVE_MPI_EXT)
+-    foreach(lib caf_mpi caf_mpi_static)
++    foreach(lib ${CAF_LIB_NAME} ${CAF_LIB_NAME_STATIC})
+       target_compile_definitions(${lib}
+     	PRIVATE -DHAVE_MPI_EXT_H)
+     endforeach()
+@@ -251,7 +251,7 @@ else()
+ endif()
+ 
+ if(CAF_ENABLE_FAILED_IMAGES)
+-  foreach(lib caf_mpi caf_mpi_static)
++  foreach(lib ${CAF_LIB_NAME} ${CAF_LIB_NAME_STATIC})
+     target_compile_definitions(${lib}
+       PUBLIC -DUSE_FAILED_IMAGES)
+   endforeach()
+@@ -269,7 +269,7 @@ endif()
+ CHECK_INCLUDE_FILES("mpi.h" HAVE_MPI_H)
+ CHECK_SYMBOL_EXISTS(I_MPI_VERSION "mpi.h" HAVE_Intel_MPI)
+ if(HAVE_Intel_MPI AND WIN32)
+-  foreach(lib caf_mpi caf_mpi_static)
++  foreach(lib ${CAF_LIB_NAME} ${CAF_LIB_NAME_STATIC})
+     target_compile_definitions(${lib}
+       PUBLIC -DUSE_GCC)
+   endforeach()
+@@ -282,7 +282,7 @@ set(CMAKE_REQUIRED_INCLUDES ${old_cmake_
+ # List of caf.in variables needing configuration:
+ #
+ # @CAF_VERSION@ @opencoarrays_aware_compiler@ @Fortran_COMPILER@ @CAF_MODDIR@
+-# @CAF_MPI_Fortran_LINK_FLAGS@ @CAF_MPI_Fortran_COMPILE_FLAGS@
++# @${CAF_LIB_NAME}_Fortran_LINK_FLAGS@ @CAF_MPI_Fortran_COMPILE_FLAGS@
+ # @CAF_LIBS@ @CAF_MPI_LIBS@
+ #
+ 
+@@ -305,9 +305,9 @@ foreach( fcflag IN LISTS MPI_Fortran_COM
+   set(CAF_MPI_Fortran_COMPILE_FLAGS "${CAF_MPI_Fortran_COMPILE_FLAGS} ${fcflag}" )
+ endforeach()
+ string(STRIP "${CAF_MPI_Fortran_COMPILE_FLAGS}" CAF_MPI_Fortran_COMPILE_FLAGS)
+-set_target_properties(caf_mpi_static
+-  PROPERTIES OUTPUT_NAME caf_mpi)
+-get_target_property(libcaf_static caf_mpi_static OUTPUT_NAME)
++set_target_properties(${CAF_LIB_NAME_STATIC}
++  PROPERTIES OUTPUT_NAME ${CAF_LIB_NAME})
++get_target_property(libcaf_static ${CAF_LIB_NAME_STATIC} OUTPUT_NAME)
+ set(CAF_LIBS "${CMAKE_INSTALL_LIBDIR}/${CMAKE_STATIC_LIBRARY_PREFIX}${libcaf_static}${CMAKE_STATIC_LIBRARY_SUFFIX}")
+ 
+ configure_file("${CMAKE_SOURCE_DIR}/src/extensions/caf.in" "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/caf"

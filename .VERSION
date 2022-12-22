@@ -1,0 +1,18 @@
+ (tag: 2.9.2, master)
+
+
+# Fall back version, probably last release:
+2.9.2
+
+# OpenCoarrays version file. This project uses semantic
+# versioning. For details see http://semver.org
+#
+# Release archive created from commit:
+# 2a8134df5ec11a2e56c5a87cc935a9452cf25a2b  (tag: 2.9.2, master)
+# Created on 2020-11-21 22:20:46 -0800 by GitHub, and
+# signed by  using 4AEE18F83AFDEB23.
+# Signature status: E
+gpg: Signature made Sat 21 Nov 2020 10:20:46 PM PST
+gpg:                using RSA key 4AEE18F83AFDEB23
+gpg: Can't check signature: No public key
+

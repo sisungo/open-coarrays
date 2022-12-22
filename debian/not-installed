@@ -1,0 +1,8 @@
+usr/include/OpenCoarrays-*/opencoarrays.mod
+usr/include/opencoarrays.mod
+usr/share/man/man1/caf.1
+usr/share/man/man1/cafrun.1
+usr/share/opencoarrays/install_manifest.SHA256.txt
+usr/lib/*/libcaf_mpich.so
+usr/lib/*/libcaf_openmpi.so
+usr/bin/*

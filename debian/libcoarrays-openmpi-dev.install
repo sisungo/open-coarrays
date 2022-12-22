@@ -1,0 +1,4 @@
+usr/lib/${DEB_HOST_MULTIARCH}/libcaf_openmpi.a		/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/openmpi/lib
+build-openmpi/bin/*                                               /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/openmpi/bin
+debian/caf-openmpi.pc                                   /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/openmpi/pkgconfig/
+/usr/lib/*/open-coarrays/openmpi/lib/libopencoarrays_mod_openmpi.a

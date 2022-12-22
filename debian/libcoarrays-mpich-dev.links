@@ -1,0 +1,8 @@
+/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/pkgconfig/caf-mpich.pc /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/pkgconfig/caf.pc
+/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/pkgconfig/caf-mpich.pc /usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/caf-mpich.pc 
+/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpich.a           /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpi.a
+/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libopencoarrays_mod_mpich.a           /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libopencoarrays_mod.a
+/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpich.so.3  	    /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpi.so.3
+/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpich.so.3  	    /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpich.so
+/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpich.so.3  	    /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpi.so
+/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib/libcaf_mpich.so.3  	    /usr/lib/${DEB_HOST_MULTIARCH}/libcaf_mpich.so

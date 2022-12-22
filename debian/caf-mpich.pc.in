@@ -1,0 +1,6 @@
+Name: CAF
+Description: Co-Array Fortran support
+Version: @VERSION@
+Requires: mpich
+Cflags: -I/usr/include/@DEB_HOST_MULTIARCH@ -I/usr/lib/@DEB_HOST_MULTIARCH@/fortran/@GFORTRAN_VERSION@
+Libs: -L/usr/lib/@DEB_HOST_MULTIARCH@/open-coarrays/mpich/lib -lcaf_mpich

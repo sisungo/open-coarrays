@@ -1,0 +1,285 @@
+open-coarrays (2.9.2-3) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Wed, 25 May 2022 10:58:58 +0800
+
+open-coarrays (2.9.2-3) unstable; urgency=medium
+
+  * Install caf/cafrun scripts in libcoarrays-*-dev pkgs
+  * Ack. change in deps that fixes old bug. CLoses: #974952
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 26 Jan 2021 18:55:40 +0000
+
+open-coarrays (2.9.2-2) unstable; urgency=medium
+
+  * Fix duplicated install in dev pkgs. Closes: #975892
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sun, 29 Nov 2020 14:53:31 +0000
+
+open-coarrays (2.9.2-1) unstable; urgency=medium
+
+  * New upstream release
+  * Debhelper level 13
+  * Standards-Version: 4.5.1
+  * Move git branches to DEP-14; update d/gbp.conf to point to d/latest
+  * Update Vcs-Git to point to debian/latest branch
+  * caf-*.pc files: cope with changing gfortran version
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 24 Nov 2020 08:25:53 +0000
+
+open-coarrays (2.9.0-2) unstable; urgency=medium
+
+  * Fix symlinks for libcaf_mpi.a to be in $libdir/open-coarrays/$mpi/lib only.
+    Closes: #964356
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 06 Jul 2020 09:50:30 +0100
+
+open-coarrays (2.9.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Use dh-sequence-fortran-mod, not --with fortran_mod
+  * Standards-Version: 4.5.0
+  * Swap definitive location of libs to $(LIBDIR)/open-coarrays/$(MPI)/lib
+    and make symlinks point there from $(LIBDIR) to avoid 'breakout'
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 04 Jul 2020 10:49:03 +0100
+
+open-coarrays (2.8.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add d/gbp.conf file
+  * Standards-Version now 4.4.1.0
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 14 Oct 2019 15:36:18 +0100
+
+open-coarrays (2.7.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Build-depend and depend on gfortran | fortran-compiler (EXPERIMENTAL)
+  * Drop dependencies on openmmpi-bin, mpich: instead build via pkg-config 
+  * Debhelper-compat 12
+  * Standards-Version: 4.4.0
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sun, 28 Jul 2019 07:00:55 +0100
+
+open-coarrays (2.4.0-2) unstable; urgency=medium
+
+  * Standards-Version: 4.3.0
+  * Move common files from mpi variants to libcoarrays-dev shared pkg
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 08 Jan 2019 10:46:26 +0000
+
+open-coarrays (2.4.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 14 Dec 2018 21:09:06 +0000
+
+open-coarrays (2.3.1-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Wed, 24 Oct 2018 11:09:06 +0100
+
+open-coarrays (2.3.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop hard-coded xz compression for debian tarball
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Thu, 18 Oct 2018 09:12:54 +0100
+
+open-coarrays (2.2.0-3) unstable; urgency=medium
+
+  * Move static libs to -dev pkg
+  * Add cmake files
+  * Add symlinks to libs from /usr/lib/$ARCH/open-coarrays/$MPI/lib
+   Closes: #908799
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 14 Sep 2018 17:17:17 +0100
+
+open-coarrays (2.2.0-2) unstable; urgency=medium
+
+  * Add MPICH support
+  * Re-organise pkgs into mpich, openmpi versions
+  * Add pkg-config caf.pc files
+  * Standards-Version: 4.2.1
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Thu, 13 Sep 2018 13:19:37 +0100
+
+open-coarrays (2.2.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Change package name on soversion: libcaf-mpi2 -> libcaf-mpi3
+  * Standards-Version: 4.2.0
+  * Add dependency on openmpi-bin to open-coarrays-bin
+  * libISO_Fortran_binding.so is no longer produced
+  * B-D on openmpi-bin, mpich
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 25 Aug 2018 08:25:57 +0100
+
+open-coarrays (2.1.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Now include IlibISO_Fortran_binding.so.2.1.0
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Wed, 30 May 2018 15:02:54 +0100
+
+open-coarrays (2.0.0-2) unstable; urgency=medium
+
+  * Build against libopenmpi3
+  * Standards-Version: 4.1.4; no changes required
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sun, 15 Apr 2018 08:57:19 +0100
+
+open-coarrays (2.0.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Build without using mpicc, just caf / pkgconfig
+  * Make libcoarrays-dev M-A: same; move includes to /usr/include/$ARCH
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sun, 11 Mar 2018 13:29:39 +0000
+
+open-coarrays (2.0.0~rc1-2) unstable; urgency=medium
+
+  * Adapt watch file to cope with ~rc extension
+  * Point VCS at salsa.debian.org
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 26 Feb 2018 11:53:36 +0000
+
+open-coarrays (2.0.0~rc1-1) experimental; urgency=medium
+
+  * New upstream release
+  * Standards-Version: 4.1.3; no changes required 
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Wed, 14 Feb 2018 12:31:48 +0000
+
+open-coarrays (1.9.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * Disable test that ICE's under gfortran-7.
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 17 Nov 2017 18:24:08 +0000
+
+open-coarrays (1.9.2-2) unstable; urgency=medium
+
+  * Standards-Version: 4.1.1; no changes required
+  * Push to unstable
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 13 Oct 2017 18:15:08 +0100
+
+open-coarrays (1.9.2-1) experimental; urgency=medium
+
+  * New upstream release
+  - libcaf_mpi1 changes SONAME to libcaf_mpi2
+  - shared_patch merged upstream
+  * disable N-S test as linking to staticlib fails
+  * Change lib_caf_mpi_static.a to libcaf_mpi.a
+  * Standards-Version: 4.1.0
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 23 Sep 2017 12:33:10 +0100
+
+open-coarrays (1.9.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Set libopencoarrys-dev as M-A: foreign
+  * Standards-Version: 4.0.1
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sun, 13 Aug 2017 11:25:16 +0100
+
+open-coarrays (1.9.0-1) experimental; urgency=medium
+
+  * New upstream release
+  * Breaks/Replaces for libcorrays0d. Closes: #863676
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Thu, 01 Jun 2017 10:03:23 +0100
+
+open-coarrays (1.8.10-1) experimental; urgency=medium
+
+  * New upstream release
+  * SOVERSION has changed; move rename libcoarrays0d -> libcaf-mpi1
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Wed, 10 May 2017 15:42:57 +0100
+
+open-coarrays (1.8.6-2) unstable; urgency=medium
+
+  * Don't build caf_single (won't work on GCC-7); rely on gfortran-internal
+    version. Closes: #853586
+  * Add missing symlink for so 1.8.6; Closes: #861001
+  * Build --no-parallel; fix race condition. Closes: #860853
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 21 Apr 2017 16:48:27 +0100
+
+open-coarrays (1.8.6-1) unstable; urgency=medium
+
+  * New upstream release
+    - disable_ns_test.patch, typos.patch, oversubscribe.patch merged upstream
+  * Add debian/watch file
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Thu, 20 Apr 2017 12:03:50 +0100
+
+open-coarrays (1.7.4-4) unstable; urgency=medium
+
+  * B-D on openssh-client, as needed to run tests locally?
+  
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 03 Dec 2016 19:21:43 +0000
+
+open-coarrays (1.7.4-3) unstable; urgency=medium
+
+  * Remove multi-arch: same from -dev; .mod files differ
+  * Use "--oversubcribe" not "--oversubscribe" for mpiexec. Closes: #846681
+  * Disable failure on tests for the moment
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Sat, 26 Nov 2016 11:23:14 +0000
+
+open-coarrays (1.7.4-2) unstable; urgency=medium
+
+  * Invert incorrect make check to enable tests
+  * Move to unstable
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 15 Nov 2016 11:22:35 +0000
+
+open-coarrays (1.7.4-1) experimental; urgency=medium
+
+  * New upstream release
+  * Re-enable tests for alpha, powerpc
+  * Multi-Arch enable
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 04 Nov 2016 01:39:33 +0000
+
+open-coarrays (1.7.0-2) unstable; urgency=medium
+
+  * Set debhelper dependency to >= 10.
+  * Don't link against static lib in navier_stokes test, breaks -fPIE,
+    bindow. Closes: #835148
+  * disable alpha, powerpc tests again. Still buggy.
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Wed, 14 Sep 2016 16:04:04 +0100
+
+open-coarrays (1.7.0-1) experimental; urgency=medium
+
+  * New upstream release
+   - re-enabled tests on alpha, powerpc
+  * DH_COMPAT=10
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Mon, 05 Sep 2016 08:27:24 +0100
+
+open-coarrays (1.6.2-2) unstable; urgency=medium
+
+  * Disable tests on powerpc, alpha while regression invesigated,
+    to allow openmpi2 transition to proceed.
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 09 Aug 2016 12:04:19 +0100
+
+open-coarrays (1.6.2-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Tue, 26 Jul 2016 15:28:27 +0100
+
+open-coarrays (1.6.0-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #826015).
+    Resubmitted with additional license Information, Jun 17
+
+ -- Alastair McKinstry <mckinstry@debian.org>  Fri, 17 Jun 2016 12:15:07 +0100

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+
+update-alternatives \
+    --install /usr/bin/caf.mpich     caf-mpich     /usr/lib/@DEB_HOST_MULTIARCH@/open-coarrays/mpich/bin/caf 40 \
+    --slave   /usr/bin/cafrun.mpich  cafrun-mpich  /usr/lib/@DEB_HOST_MULTIARCH@/open-coarrays/mpich/bin/cafrun 
+
+update-alternatives \
+    --install /usr/bin/caf     caf    /usr/bin/caf.mpich   40 \
+    --slave   /usr/bin/cafrun  cafrun /usr/bin/cafrun.mpich
+
+fi
+
+#DEBHELPER#

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+# Note  two-level system
+
+if [ "$1" = "configure" ]; then
+
+update-alternatives \
+    --install /usr/bin/caf.openmpi    caf-openmpi    /usr/lib/@DEB_HOST_MULTIARCH@/open-coarrays/openmpi/bin/caf 50 \
+    --slave   /usr/bin/cafrun.openmpi cafrun-openmpi /usr/lib/@DEB_HOST_MULTIARCH@/open-coarrays/openmpi/bin/cafrun 
+
+update-alternatives \
+    --install /usr/bin/caf    caf    /usr/bin/caf.openmpi   50 \
+    --slave   /usr/bin/cafrun cafrun /usr/bin/cafrun.openmpi
+
+fi
+
+#DEBHELPER#

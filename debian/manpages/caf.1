@@ -1,0 +1,63 @@
+.TH caf 1 OpenCoArrays
+
+.SH NAME
+caf - Fortran compiler wrapper for OpenCoarrays
+
+.SH SYNOPSIS
+caf <fortran-source-file> [options] ...
+
+.SH OPTIONS
+.TP
+\fB--help, -h\fR
+Show this help message
+\fB--version, -v, -V\fR
+Report version and copyright information
+\fB--wrapping, -w, --wraps\fR
+Report the name of the wrapped compiler
+
+
+.SH EXAMPLES
+   caf foo.f90 -o foo
+   caf -v
+   caf --help
+
+.SH DESCRIPTION
+
+As of OpenCoarrays 1.6.0, caf supports three categories of compilers
+with the following restrictions for each use case:
+
+ 1. With an OpenCoarrays-Aware (OCA) compiler (GNU 5.1.0 or later),
+   a. If any of the options listed above appear, any remaining arguments are ignored.
+   b. If present, <fortran-source-file> must
+      * be a Fortran source file,
+      * appear before all other arguments,
+      * be the only Fortran source file in the argument list,
+      * have a name of the form *.f90, *.F90, *.f, or *.F.
+   c. The environment variable 'CAFC' must be empty or point to a Fortran compiler/linker.
+   d. If 'CAFC' is empty, a default value of 'mpif90' is used.
+
+ 2. With non-OCA CAF compilers (Intel or Cray),
+   a. Observe restrictions 1a-d above.
+   b. Access OpenCoarrays collective subroutines via use association with an only clause,
+      e.g., 'use opencoarrays, only : co_sum,co_broadcast'
+
+ 3. With non-CAF compilers (all compilers not named above),
+   a. Observe restrictions 1a-d above.
+   b. Access OpenCoarrays capabilities via use association ('use opencoarrays').
+   c. The only CAF statements or expressions allowed are the following:
+      * 'num_images()'
+      * 'this_image()' with or without arguments
+      * 'sync all' with or without arguments.
+      * 'sync images' with or without arguments.
+      * 'error stop' without arguments.
+      * 'co_sum', 'co_broadcast', 'co_max', 'co_min', or 'co_reduce'
+
+ The caf wrapper will append -L, -l, and other required arguments as necessary
+ using values that get set during the OpenCoarrays build and installation.
+
+.SH SEE ALSO
+cafrun(1)
+
+.SH AUTHOR
+caf is part of the OpenCoarrays package from Sourcery, Inc.
+This manual page was written by Alastair McKinstry

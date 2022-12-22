@@ -1,0 +1,14 @@
+Origin-Bug: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881918
+Description: Disable bug that ICE's with gfortran-7
+Author: Alastair McKinstry <mckinstry@debian.org>
+Last-Updated: 2017-11-17
+Forwarded: no
+
+Index: open-coarrays-2.9.0/src/tests/integration/pde_solvers/CMakeLists.txt
+===================================================================
+--- open-coarrays-2.9.0.orig/src/tests/integration/pde_solvers/CMakeLists.txt
++++ open-coarrays-2.9.0/src/tests/integration/pde_solvers/CMakeLists.txt
+@@ -1,2 +1,2 @@
+ add_subdirectory( coarrayBurgers )
+-add_subdirectory( coarrayHeatSimplified )
++# add_subdirectory( coarrayHeatSimplified )

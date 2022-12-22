@@ -1,0 +1,5 @@
+usr/lib/${DEB_HOST_MULTIARCH}/libcaf_mpich.a		/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib
+build-mpich/bin/*						/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/bin
+usr/lib/${DEB_HOST_MULTIARCH}/libcaf_mpich.a		/usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/lib
+debian/caf-mpich.pc                                   /usr/lib/${DEB_HOST_MULTIARCH}/open-coarrays/mpich/pkgconfig/
+/usr/lib/*/open-coarrays/mpich/lib/libopencoarrays_mod_mpich.a

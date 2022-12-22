@@ -1,0 +1,34 @@
+.TH cafrun 1 OpenCoArrays
+
+.SH NAME
+cafrun - Coarray Fortran executable launcher for OpenCoarrays
+
+.SH SYNOPSIS
+cafrun [options] ...
+
+
+.SH OPTIONS
+\fB--help, -h\fR
+Show this help message
+\fB--version, -v, -V\fR
+Report version and copyright information
+\fB--wrapping, -w, --wraps\fR
+Report the name of the wrapped compiler
+
+.SH EXAMPLES
+   cafrun -np 2 foo
+   cafrun -v
+   cafrun --help
+
+.SH NOTES
+
+[options] must a CAF executable file, one of the above arguments,
+   or an argument to the program name returned by caf --wraps
+
+.SH SEE ALSO
+caf(1)
+
+.SH AUTHOR
+caf is part of the OpenCoarrays package from Sourcery, Inc.
+This manual page was written by Alastair McKinstry
+

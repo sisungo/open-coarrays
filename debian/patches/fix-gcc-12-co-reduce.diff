@@ -1,0 +1,44 @@
+--- open-coarrays-2.9.2.orig/src/tests/regression/reported/issue-172-wrong-co_reduce-int64.f90
++++ open-coarrays-2.9.2/src/tests/regression/reported/issue-172-wrong-co_reduce-int64.f90
+@@ -13,7 +13,7 @@ program co_reduce_factorial_int64
+   integer(kind=8) :: np
+   value = this_image ( )
+   np = num_images ( )
+-  call co_reduce ( value, result_image = 1, operator = myProd )
++  call co_reduce ( value, result_image = 1, operation = myProd )
+   !! value[k /= 1] undefined, value[ k == 1 ] should equal $n!$ where $n$ is `num_images()`
+   if ( this_image ( ) == 1 ) then
+      write ( * , '( "Number of images = ", g0 )' ) num_images ( )
+--- open-coarrays-2.9.2.orig/src/tests/regression/reported/issue-172-wrong-co_reduce-int8.f90
++++ open-coarrays-2.9.2/src/tests/regression/reported/issue-172-wrong-co_reduce-int8.f90
+@@ -13,7 +13,7 @@ program co_reduce_factorial_int8
+   integer(kind=1) :: np
+   np = num_images ( )
+   value = this_image ( )
+-  call co_reduce ( value, result_image = 1, operator = myProd )
++  call co_reduce ( value, result_image = 1, operation = myProd )
+   !! value[k /= 1] undefined, value[ k == 1 ] should equal $n!$ where $n$ is `num_images()`
+   if ( this_image ( ) == 1 ) then
+      write ( * , '( "Number of images = ", g0 )' ) num_images ( )
+--- open-coarrays-2.9.2.orig/src/tests/regression/reported/issue-172-wrong-co_reduce.f90
++++ open-coarrays-2.9.2/src/tests/regression/reported/issue-172-wrong-co_reduce.f90
+@@ -11,7 +11,7 @@ program co_reduce_factorial
+   integer :: value[ * ] !! Each image stores their image number here
+   integer :: k
+   value = this_image ( )
+-  call co_reduce ( value, result_image = 1, operator = myProd )
++  call co_reduce ( value, result_image = 1, operation = myProd )
+   !! value[k /= 1] undefined, value[ k == 1 ] should equal $n!$ where $n$ is `num_images()`
+   if ( this_image ( ) == 1 ) then
+      write ( * , '( "Number of images = ", g0 )' ) num_images ( )
+--- open-coarrays-2.9.2.orig/src/tests/unit/collectives/co_reduce_res_im.f90
++++ open-coarrays-2.9.2/src/tests/unit/collectives/co_reduce_res_im.f90
+@@ -11,7 +11,7 @@ program co_reduce_res_im
+   integer :: value[ * ] !! Each image stores their image number here
+   integer :: k
+   value = this_image ( )
+-  call co_reduce ( value, result_image = 1, operator = myProd )
++  call co_reduce ( value, result_image = 1, operation = myProd )
+   !! value[k /= 1] undefined, value[ k == 1 ] should equal $n!$ where $n$ is `num_images()`
+   if ( this_image ( ) == 1 ) then
+      write ( * , '( "Number of images = ", g0 )' ) num_images ( )

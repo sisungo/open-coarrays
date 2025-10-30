@@ -1,3 +1,9 @@
+open-coarrays (2.9.2-3deepin1) UNRELEASED; urgency=medium
+
+  * fix: the package no longer builds with gcc-12
+
+ -- sisungo <sisungo@icloud.com>  Thu, 30 Oct 2025 22:46:21 +0800
+
 open-coarrays (2.9.2-3) UNRELEASED; urgency=medium
 
   * update
